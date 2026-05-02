@@ -655,7 +655,7 @@
     </div>
 
     <script>
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzPwAFMzoQK8LQVzZKqDIX6LHsKOS1fbteD6It0_zNQ4A9JkG_s6t847FaI4eD0hh7p_w/exec';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzKE2oDN1fY5NT9rE43XqZYMrKiVM52dJb629KuljjQcqOd9u84rCM5chqIHlmeXianYA/exec';
 
 const form = document.getElementById('surveyForm');
 const formPage = document.getElementById('formPage');
@@ -740,21 +740,24 @@ form.addEventListener('submit', async function(e) {
   };
 
   const params = new URLSearchParams();
-  for (const key in formData) {
-    params.append(key, formData[key]);
-  }
+for (const key in formData) {
+  params.append(key, formData[key]);
+}
 
-  try {
-    const response = await fetch(APPS_SCRIPT_URL, {
-      method: 'POST',
-      body: params
-    });
+try {
+  const response = await fetch(APPS_SCRIPT_URL, {
+    method: 'POST',
+    body: params
+  });
 
-    const resultText = await response.text();
-    console.log('Apps Script 응답:', resultText);
-  } catch (error) {
-    console.error('시트 저장 오류:', error);
-  }
+  const resultText = await response.text();
+  alert(resultText);
+  console.log(resultText);
+
+} catch (error) {
+  alert('시트 저장 오류: ' + error.message);
+  console.error('시트 저장 오류:', error);
+}
 });
 
 form.addEventListener('change', function() {
