@@ -729,17 +729,24 @@
    };
 
    // 구글시트 전송
-   try {
-     await fetch(APPS_SCRIPT_URL, {
-       method: 'POST',
-       headers: {
-         'Content-Type': 'application/json'
-       },
-       body: JSON.stringify(formData)
-     });
-   } catch (error) {
-     console.error('시트 저장 오류:', error);
-   }
+try {
+ const response = await fetch(APPS_SCRIPT_URL, {
+   method: 'POST',
+   headers: {
+     'Content-Type': 'application/json'
+   },
+   body: JSON.stringify(formData)
+ });
+
+ const resultText = await response.text();
+ alert('Apps Script 응답: ' + resultText);
+ console.log('Apps Script 응답:', resultText);
+
+} catch (error) {
+ alert('시트 저장 오류: ' + error.message);
+ console.error('시트 저장 오류:', error);
+}
+
 
    // 결과 페이지 표시
    document.getElementById('finalScore').textContent = totalScore;
